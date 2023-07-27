@@ -1,5 +1,6 @@
 from readchar import readkey, key
 import os
+
 "Parte I"
 
 nombre_jugador = input("Ingresar el nombre del jugador: ")
@@ -10,18 +11,21 @@ Parte II
 Bucle infinito, detecta que tecla se pulsa y se cierra con la flecha arriba
 """
 
+"""
 while True:
     k = readkey()
     if k == key.UP:
         break
     else:
         print(k)
+"""
 
 """
 Parte III
 Manipulación de la consola mediante la libreria os
 """
 
+"""
 def limpiar_terminal(a):
     num = 0
     while True:
@@ -32,6 +36,7 @@ def limpiar_terminal(a):
             print(num)
         if num == 50:
             break
+"""
 
 """
 Parte IV
@@ -58,8 +63,7 @@ mapa = """..###################
 #.#.#.#.#.......#...#
 #.#.#.#.###.###.#.###
 #...#.#.#...#...#...#
-###################.#
-"""
+###################.#"""
 
 def matriz(mapa: str):
     matriz = []
@@ -73,11 +77,12 @@ def pantalla(laberinto):
     for i in laberinto:
         print(i, sep='\n')
 
-def main_loop(mapa):
+def main_loop():
     laberinto, coor_final = matriz(mapa)
     py, px = 0, 0
     personaje_coor = [py, px]
     laberinto[py][px] = 'P'
+    pantalla(laberinto)
     while True:
         k = readkey()
         if k == key.UP:
@@ -85,7 +90,8 @@ def main_loop(mapa):
             if py != -1:
                 if laberinto[py][px] == '.':
                     laberinto[py][px] = 'P'
-                    personaje_coor[0] += py
+                    laberinto[py+1][px] = '.'
+                    personaje_coor[0] = py
                     pantalla(laberinto)
                 elif laberinto[py][px] == '#':
                     py += 1
@@ -97,7 +103,8 @@ def main_loop(mapa):
             py += 1
             if laberinto[py][px] == '.':
                 laberinto[py][px] = 'P'
-                personaje_coor[0] += py
+                laberinto[py-1][px] = '.'
+                personaje_coor[0] = py
                 pantalla(laberinto)
             elif laberinto[py][px] == '#':
                 pantalla(laberinto)
@@ -105,4 +112,26 @@ def main_loop(mapa):
         if k == key.LEFT:
             px -= 1
             if px != -1:
-              #Continuar codigo
+                if laberinto[py][px] == '.':
+                    laberinto[py][px] = 'P'
+                    laberinto[py][px+1] = '.'
+                    personaje_coor[1] = px
+                    pantalla(laberinto)
+                elif laberinto[py][px] == '#':
+                    pantalla(laberinto)
+                    px += 1
+            else:
+                px += 1
+                pantalla(laberinto)
+        if k == key.RIGHT:
+            px += 1
+            if laberinto[py][px] == '.':
+                laberinto[py][px] = 'P'
+                laberinto[py][px-1] = '.'
+                personaje_coor[1] = px
+                pantalla(laberinto)
+            elif laberinto[py][px] == '#':
+                pantalla(laberinto)
+                px -= 1
+        if tuple(personaje_coor) == coor_final:
+            break
