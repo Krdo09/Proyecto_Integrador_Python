@@ -3,8 +3,8 @@ import os
 
 "Parte I"
 
-nombre_jugador = input("Ingresar el nombre del jugador: ")
-print("Bienvenido al juego,", nombre_jugador)
+#nombre_jugador = input("Ingresar el nombre del jugador: ")
+#print("Bienvenido al juego,", nombre_jugador)
 
 """
 Parte II
@@ -74,8 +74,8 @@ def matriz(mapa: str):
 
 def pantalla(laberinto):
     os.system('cls' if os.name == 'nt' else 'clear')
-    for i in laberinto:
-        print(i, sep='\n')
+    for fila in laberinto:
+        print("".join(fila), sep='\n')
 
 def main_loop():
     laberinto, coor_final = matriz(mapa)
