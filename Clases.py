@@ -20,8 +20,8 @@ class Juego:
             matriz.append(list(line))
         return matriz
 
-    @classmethod
-    def pantalla(cls, laberinto: list):
+    @staticmethod
+    def pantalla(laberinto: list):
         os.system('cls' if os.name == 'nt' else 'clear')
         for fila in laberinto:
             print("".join(fila), sep='\n')
@@ -79,11 +79,8 @@ class JuegoArchivo(Juego):
     def archivos():
         path_mapas = "C:/Users/MrBra/OneDrive/Documentos/Documentos Julián/Clases ProTalento/Trabajos/Proyecto_Integrador/Mapas"
         path_completo = f"{path_mapas}/{random.choice(os.listdir(path_mapas))}"
+        map_string = ""
         with open(f"{path_completo}", "r") as datos:
-            while True:
-                try:
-                    line = datos.readline()
-
-                except:
-                    pass
-
+            for line in datos:
+                map_string += line
+        return map_string.strip()
