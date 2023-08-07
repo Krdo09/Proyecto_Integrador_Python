@@ -1,8 +1,12 @@
 from Clases import Juego, JuegoArchivo
-from Laberinto import mapa
+from functools import reduce
+
 def main():
-    j1 = JuegoArchivo(mapa, (0, 0), (20, 19))
-    #JuegoArchivo.archivos()
+    coordenadas, mapa = JuegoArchivo.archivos2()
+    coor_ini = tuple([coordenadas[0], coordenadas[1]])
+    coor_final = tuple([int(reduce(lambda result, num: str(result) + str(num), coordenadas[2:4])),
+                        int(reduce(lambda result, num: str(result) + str(num), coordenadas[4:6]))])
+    j1 = JuegoArchivo(mapa, coor_ini, coor_final)
     j1.loop(j1.matriz())
 
 
