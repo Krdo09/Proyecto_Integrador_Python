@@ -1,4 +1,4 @@
-from Clases import Juego, JuegoArchivo
+from Clases import JuegoArchivo
 from functools import reduce
 
 def main():
